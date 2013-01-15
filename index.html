@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8"/>
+		<link rel="stylesheet" href="stylesheets/treadstone.min.css"/>
+		<script type="text/javascript" src="scripts/treadstone.js" defer></script>
+		<title>Treadstone</title>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Treadstone</h1>
+			<h2>根据内容自动改变大小的容器</h2>
+			<div class="content-aware-resize">
+				<p>这是一个根据内容自动改变大小的容器，使用方法是给元素加上一个“content-aware-resize”的class。例如：</p>
+				<pre>
+					<code>
+<samp>&lt;div class="content-aware-resize"&gt;</samp>
+					...skdjkd skdjkdjkwdjk sdjksdj sdksjdsdjksd skdjksdjsjd ksjdksjfkf  fjkefjkef ekjfkjddjkdjsk jkjdskjd 
+					&lt;/div&gt;
+					</code>
+				</pre>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam vestibulum accumsan nisl.</p>
+			</div>
+			<div class="row">
+				<p class="span2">
+					<a href="#" data-toggle="dropdown" data-target="#dropdown1">Menu1</a>
+					<div class="dropdown" id="dropdown1">
+						<menu>
+							<a href="#">Menu 1</a>
+							<a href="#">Logout</a>
+							<a href="#">修改个人资料</a>
+						</menu>
+					</div>
+				</p>
+				<p class="span3">This is span3 <a href="#" data-toggle="dropdown" data-target="#dropdown2">Dropdown 2</a>
+					<div class="dropdown" id="dropdown2">
+						<a href="#">Menu 1</a>
+						<a href="#">Menu 2</a>
+						<a href="#">Menu 3</a>
+					</div>
+				</p>
+				<p class="span7">This is span7
+					<a href="#" class="btn">按钮</a>
+					<a href="#" class="blue btn">按钮</a>
+					<a href="#" class="cyan btn">按钮</a>
+				</p>
+				<div class="span9">
+					<ul class="tabs">
+						<li class="active"><a data-toggle="tab" href="#tab1">公告</a></li>
+						<li><a data-toggle="tab" href="#tab2">游戏资料</a></li>
+						<li><a data-toggle="tab" href="#tab3">活动</a></li>
+					</ul>
+					<section class="tab-panel" id="tab1">
+						Tab Panel 1
+					</section>
+					<section class="tab-panel" id="tab2">
+						Tab Panel 2
+					</section>
+					<section class="tab-panel" id="tab3">
+						Tab Panel 3
+					</section>
+				</div>
+				<div class="span3">This is span3</div>
+			</div>
+			<div class="row">
+				<div class="span8">This is span8
+					<ul class="tiles">
+						<li>
+							<img class="thumbnail" src="http://p1.youxi.bdimg.com/attachment/sys/portrait/item/7284/b/90b77a696a69615f77616e67060d.jpg" />
+							<div class="content">
+								<h5>大侠传</h5>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div style="position:relative" class="span2">This is span2
+					<a href="#" class="btn" data-toggle="modal" data-target="#server-selector">选择服务器</a>
+					<div class="overlay" id="server-selector">
+						<div class="overlay-inner">
+							<div class="modal">
+								<button class="close">&times;</button>
+								<div class="modal-header">
+									<h3>Modal 选择服务器</h3>
+								</div>
+								<div class="modal-body">
+									<a href="#" class="btn">百度一区</a>
+									<a href="#" class="btn">百度一区</a>
+									<a href="#" class="btn">百度一区</a>
+									<a href="#" class="btn">百度一区</a>
+									<a href="#" class="btn">百度一区</a>
+									<a href="#" class="btn">百度一区</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span2">This is span2</div>
+			</div>
+		</div>
+	</body>
+</html>
