@@ -47,6 +47,10 @@
 	from{clip:rect(0px,auto,auto,auto);}
 	to{clip:rect(1px,auto,auto,auto);}
 }
+.content-aware-resize{
+	padding:2em;
+	border:.2em solid red;
+}
 .content-aware-resize>*:first-child{
 	&:nth-last-child(2n){
 		.animation(contentChanged1,.001s);
@@ -125,6 +129,10 @@ body{
 	font-size:87.5%;
 	font-family:sans-serif;
 }
+pre{
+	padding:1em;
+	background-color:#eee;
+}
 code{
 	font-family:Monaco, Menlo, Consolas, "Courier New", monospace;
 }
@@ -132,17 +140,15 @@ a{
 	color:#08c;
 	text-decoration:none;
 }
-pre{
-	padding:1em;
-	background-color:#eee;
-	line-height:1.5;
-}
 p{
-	margin:1em 0;
+	margin:0 0 1em;
+	&:last-child{
+		margin-bottom:0;
+	}
 	code{
 		padding:.2em .4em;
-		margin:0 .3em;
-		background-color:rgba(0,0,0,.05);
+		margin:0 .2em;
+		background-color:#e3e3e3;
 		border-radius:.2em;
 	}
 }
@@ -275,6 +281,8 @@ select{
 	}
 }
 ul{
+	padding:0;
+	margin:0;
 	&.unstyled{
 		list-style:none;
 	}

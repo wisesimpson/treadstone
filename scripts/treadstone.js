@@ -1,3 +1,4 @@
+"use strict";
 (function(){
 	var $=function(query){
 		if(!query){

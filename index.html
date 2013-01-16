@@ -3,24 +3,36 @@
 	<head>
 		<meta charset="utf8"/>
 		<link rel="stylesheet" href="stylesheets/treadstone.min.css"/>
+		<link rel="stylesheet" href="stylesheets/example.min.css"/>
 		<script type="text/javascript" src="scripts/treadstone.js" defer></script>
+		<script type="text/javascript" src="scripts/example.js" defer></script>
 		<title>Treadstone</title>
 	</head>
 	<body>
 		<div class="container">
-			<h1>Treadstone</h1>
-			<h2>根据内容自动改变大小的容器</h2>
-			<div class="content-aware-resize">
-				<p>这是一个根据内容自动改变大小的容器，使用方法是给元素加上一个“content-aware-resize”的class。例如：</p>
-				<pre>
-					<code>
-<samp>&lt;div class="content-aware-resize"&gt;</samp>
-					...skdjkd skdjkdjkwdjk sdjksdj sdksjdsdjksd skdjksdjsjd ksjdksjfkf  fjkefjkef ekjfkjddjkdjsk jkjdskjd 
-					&lt;/div&gt;
-					</code>
-				</pre>
+			<article>
+				<h1>Treadstone</h1>
+				<section>
+					<h2>根据内容自动改变大小的容器</h2>
+					<p>给元素加上<code>class="content-aware-resize"</code>可以让它变成根据内容自动改变大小的容器。例如：</p>
+					<div class="content-aware-resize example-box">
+						<p>这是一个根据内容自动改变大小的容器</p>
+						<form>
+							<input type="text" placeholder="在这里输入文字并提交来看看效果"/>
+							<input type="submit" />
+						</form>
+					</div>
+					<ul>
+						<li>本容器只在增加和减少子元素时有效果</li>
+						<li>在减少子元素时，仅当减少奇数个子元素时有效果</li>
+						<li>直接修改本容器内的文本节点无效果</li>
+					</ul>
+				</section>
+<pre><code>&lt;div class="content-aware-resize"&gt;
+...
+&lt;/div&gt;</code></pre>
 				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam vestibulum accumsan nisl.</p>
-			</div>
+		</article>
 			<div class="row">
 				<p class="span2">
 					<a href="#" data-toggle="dropdown" data-target="#dropdown1">Menu1</a>
