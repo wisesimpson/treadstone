@@ -43,9 +43,25 @@
 				</section>
 				<section>
 					<h2>弹出居中层（模态）</h2>
-					<p>
-						<a href="#" class="btn" data-toggle="modal" data-target="#server-selector">弹出居中层</a>
-					</p>
+					<pre><code>&lt;a href="#" class="btn" data-toggle="modal" data-target="#server-selector"&gt;弹出居中层&lt;/a&gt;
+  &lt;div class="overlay" id="server-selector"&gt;
+    &lt;div class="overlay-inner"&gt;
+      &lt;div class="modal"&gt;
+        &lt;button class="close"&gt;&times;&lt;/button&gt;
+        &lt;div class="modal-header"&gt;
+          &lt;h3&gt;标题&lt;/h3&gt;
+        &lt;/div&gt;
+        &lt;div class="modal-body"&gt;
+          &lt;a href="#" class="btn"&gt;按钮一&lt;/a&gt;
+          &lt;a href="#" class="btn"&gt;按钮二&lt;/a&gt;
+          &lt;a href="#" class="btn"&gt;按钮三&lt;/a&gt;
+          &lt;a href="#" class="btn"&gt;按钮四&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;&lt;div class="content-aware-resize"&gt;
+&lt;/div&gt;</code></pre>
+					<a href="#" class="btn" data-toggle="modal" data-target="#server-selector">弹出居中层</a>
 					<div class="overlay" id="server-selector">
 						<div class="overlay-inner">
 							<div class="modal">
@@ -63,11 +79,19 @@
 						</div>
 					</div>
 				</section>
+				<section>
+					<h2>按钮样式</h2>
+					<p>
+						<a href="#" class="btn">默认按钮</a>
+						<a href="#" class="blue btn">蓝色按钮</a>
+						<a href="#" class="cyan btn">青色按钮</a>
+						<a href="#" class="green btn">绿色按钮</a>
+						<a href="#" class="red btn">红色按钮</a>
+					</p>					
+				</section>
 		</article>
 
-<pre><code>&lt;div class="content-aware-resize"&gt;
-...
-&lt;/div&gt;</code></pre>
+
 				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam vestibulum accumsan nisl.</p>
 			<div class="row">
 				<p class="span2">
@@ -80,9 +104,6 @@
 					</div>
 				</p>
 				<p class="span7">This is span7
-					<a href="#" class="btn">按钮</a>
-					<a href="#" class="blue btn">按钮</a>
-					<a href="#" class="cyan btn">按钮</a>
 				</p>
 				<div class="span9">
 					<ul class="tabs">

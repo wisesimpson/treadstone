@@ -559,7 +559,7 @@ ul.tabs li a {
 }
 .overlay .modal {
   position: relative;
-  width: 500px;
+  width: 25rem;
   border: .2em solid #000;
   margin: 0 auto 5%;
   background-color: #fff;
