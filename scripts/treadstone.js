@@ -129,8 +129,10 @@
 		}
 	};
 	
+	
+	var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+	
 	var addContentChangeObserver=function(target){
-		var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
 		var observer = new MutationObserver(function(mutations) {
 		  contentChanged(mutations[0].target);
 		});
