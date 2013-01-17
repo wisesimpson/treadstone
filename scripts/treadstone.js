@@ -128,13 +128,22 @@
 			container.style.minWidth=0;
 		}
 	};
-	var animationstart=function(e){
-		if(e.animationName=='contentChanged1'||e.animationName=='contentChanged2'){
-			contentChanged(e.target.parentNode);
-		}
-	};
-	document.addEventListener('animationstart',animationstart);
-	document.addEventListener('webkitAnimationStart',animationstart);
+	
+	var addContentChangeObserver=function(target){
+		var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+		var observer = new MutationObserver(function(mutations) {
+		  contentChanged(mutations[0].target);
+		});
+		
+		var config = { attributes: false, childList: true, characterData: true }
+		  
+		observer.observe(target, config);
+	}
+	
+	$('.content-aware-resize').each(function(){
+		addContentChangeObserver(this);
+	});
+	
 	var transitionend=function(e){
 		console.log(e.propertyName);
 		$(e.target).setPrefixStyle('transition','none');
