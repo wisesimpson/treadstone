@@ -1,4 +1,21 @@
 "use strict";
+
+if(!('dataset' in document.createElement('a'))){
+	Object.defineProperty(self.HTMLElement['prototype'],'dataset',{
+		get:function(){
+			var attributes=this.attributes;
+			for(var i=0;i<attributes.length;i++){
+				console.log(attributes.item(i));
+				if(new RegExp('^data(-\\w+)+$').test(attributes.item(i).name){
+
+				}
+			}
+		},
+		enumerable:true,
+		configurable:true
+	});
+}
+		
 (function(){
 	var $=function(query){
 		if(!query){
