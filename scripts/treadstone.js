@@ -160,7 +160,16 @@ if(!('dataset' in document.createElement('a'))){
 	}
 	
 	$('.content-aware-resize').each(function(){
-		addContentChangeObserver(this);
+		if(MutationObserver){
+			addContentChangeObserver(this);
+		}else{
+			this.addEventListener('DOMNodeInserted',funtion(){
+				contentChanged(this.target);
+			});
+			this.addEventListener('DOMNodeRemoved',funtion(){
+				contentChanged(this.target);
+			});
+		}
 	});
 	
 	var transitionend=function(e){
