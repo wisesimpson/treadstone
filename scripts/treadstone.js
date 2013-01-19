@@ -171,10 +171,10 @@ if(!('dataset' in document.createElement('a'))){
 		if(MutationObserver){
 			addContentChangeObserver(this);
 		}else{
-			this.addEventListener('DOMNodeInserted',funtion(){
+			this.addEventListener('DOMNodeInserted',function(){
 				contentChanged(this.target);
 			});
-			this.addEventListener('DOMNodeRemoved',funtion(){
+			this.addEventListener('DOMNodeRemoved',function(){
 				contentChanged(this.target);
 			});
 		}
