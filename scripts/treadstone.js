@@ -4,12 +4,20 @@ if(!('dataset' in document.createElement('a'))){
 	Object.defineProperty(self.HTMLElement['prototype'],'dataset',{
 		get:function(){
 			var attributes=this.attributes;
+			var dataset={};
 			for(var i=0;i<attributes.length;i++){
-				console.log(attributes.item(i));
-				if(new RegExp('^data(-\\w+)+$').test(attributes.item(i).name){
-
+				if(new RegExp('^data(-\\w+)+$').test(attributes.item(i).name)){
+					var nameArray=attributes.item(i).name.substring(5).split('-');
+					var name=nameArray[0];
+					if(nameArray.length>1){
+						for(var j=1;j<name.length;j++){
+							name+=nameArray[j].substring(0,1).toUpperCase()+nameArray[j].substring(1);
+						}
+					}
+					dataset[name]=attributes.item(i).value;
 				}
 			}
+			return dataset;
 		},
 		enumerable:true,
 		configurable:true
