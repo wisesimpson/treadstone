@@ -155,7 +155,7 @@ if(!('dataset' in document.createElement('a'))){
 				console.log('mutation');
 				resize(mutations[0].target);
 			});
-			observer.observe(container,{ attributes: false, childList: true, characterData: true });
+			observer.observe(container,{ attributes: false, childList: true, characterData: true, subtree: true});
 		}else{
 			container.addEventListener('DOMNodeInserted',function(e){
 				resize(e.target);
