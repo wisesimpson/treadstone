@@ -132,65 +132,61 @@ if(!('dataset' in document.createElement('a'))){
 		});
 	});
 
-	var contentChanged=function(container){
-		if(container.style.overflow!='hidden'){
-			container.style.maxHeight=container.style.minHeight=window.getComputedStyle(container).height;
-			container.style.maxWidth=container.style.minWidth=window.getComputedStyle(container).width;
-			container.style.overflow='hidden';
-		}
-		if(container.scrollHeight>container.clientHeight){
-			$(container).setPrefixStyle('transition','max-height 1s');
-			container.style.maxHeight=container.scrollHeight+'px';
-		}else{
-			$(container).setPrefixStyle('transition','min-height 1s');
-			container.style.minHeight=0;
-		}
-		if(container.scrollWidth>container.clientWidth){
-			$(container).setPrefixStyle('transition','all 1s');
-			container.style.maxWidth=container.scrollWidth+'px';
-		}else{
-			$(container).setPrefixStyle('transition','all 1s');
-			container.style.minWidth=0;
-		}
-	};
-	
-	
-	var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-	
-	var addContentChangeObserver=function(target){
-		var observer = new MutationObserver(function(mutations) {
-		  contentChanged(mutations[0].target);
-		});
-		
-		var config = { attributes: false, childList: true, characterData: true }
-		  
-		observer.observe(target, config);
-	}
-	
-	$('.content-aware-resize').each(function(){
-		if(MutationObserver){
-			addContentChangeObserver(this);
-		}else{
-			this.addEventListener('DOMNodeInserted',function(e){
-				contentChanged(e.target);
-			});
-			this.addEventListener('DOMNodeRemoved',function(e){
-				contentChanged(e.target);
-			});
-		}
-	});
-	
-	var transitionend=function(e){
-		console.log(e.propertyName);
-		$(e.target).setPrefixStyle('transition','none');
-		if(e.target.classList.contains('content-aware-resize')){
-			if(e.propertyName=='min-height'||e.propertyName=='max-height'){
-				e.target.style.minHeight=e.target.style.maxHeight=window.getComputedStyle(e.target).height;
-			}else if(e.propertyName=='min-width'||e.propertyName=='max-width'){
-				e.target.style.minWidth=e.target.style.maxWidth=window.getComputedStyle(e.target).width;
+	var initContentAwareResize=function(container){
+		container.style.minHeight=container.style.maxHeight=window.getComputedStyle(container).height;
+		container.style.minWidth=container.style.maxWidth=window.getComputedStyle(container).width;
+		container.style.overflow='hidden';
+		var resize=function(container){
+			$(container).setPrefixStyle('transition','max-height,min-height,max-width,min-width .3s,.3s,.3s,.3s');
+			if(container.scrollHeight>container.clientHeight){
+				container.style.maxHeight=container.scrollHeight-container.clientHeight+parseInt(window.getComputedStyle(container).height,10)+'px';
+			}else{
+				container.style.minHeight='0px';
 			}
+			if(container.scrollWidth>container.clientWidth){
+				container.style.maxWidth=container.scrollWidth-container.clientWidth+parseInt(window.getComputedStyle(container).width,10)+'px';
+			}else{
+				container.style.minWidth='0px';
+			}
+		};
+		var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+		if(MutationObserver){
+			var observer = new MutationObserver(function(mutations) {
+				console.log('mutation');
+				resize(mutations[0].target);
+			});
+			observer.observe(container,{ attributes: false, childList: true, characterData: true });
+		}else{
+			container.addEventListener('DOMNodeInserted',function(e){
+				resize(e.target);
+			});
+			container.addEventListener('DOMNodeRemoved',function(e){
+				resize(e.target);
+			});
 		}
+		var transitionend=function(e){
+			console.log(e.propertyName);
+			if(e.propertyName=='min-height'&&e.target.style.minHeight=='0px'){
+				e.target.style.minHeight=window.getComputedStyle(e.target).height;
+			}else if(e.propertyName=='min-width'&&e.target.style.minWidth=='0px'){
+				e.target.style.minWidth=window.getComputedStyle(e.target).width;
+			}
+		};
+		container.addEventListener('transitionend',transitionend);
+		container.addEventListener('webkitTransitionEnd',transitionend);
 	};
-	document.addEventListener('transitionend',transitionend);
-	document.addEventListener('webkitTransitionEnd',transitionend);
+
+	var init=function(){
+		initContentAwareResize(document.querySelector('.content-aware-resize'));
+	};
+
+	if(document.readyState=='complete'){
+		init();
+	}else{
+		document.onreadystatechange=function(){
+			if(document.readyState=='complete'){
+				init();
+			}		
+		};
+	}
 })();

@@ -1,3 +1,13 @@
+.transition (@property:all, @duration:0.3s){
+	-moz-transition-property:@property;
+	-moz-transition-duration:@duration;
+	-webkit-transition-property:@property;
+	-webkit-transition-duration:@duration;
+	-ms-transition-property:@property;
+	-ms-transition-duration:@duration;
+	transition-property:@property;
+	transition-duration:@duration;
+}
 .animation (@animation-name, @duration:0.3s) {
 	-webkit-animation-name:@animation-name;
 	-webkit-animation-duration:@duration;
@@ -13,47 +23,6 @@
 	-moz-animation-delay:@delay;
 	-ms-animation-delay:@delay;
 	animation-delay:@delay;
-}
-
-@keyframes contentChanged1{
-	from{clip:rect(1px,auto,auto,auto);}
-	to{clip:rect(0px,auto,auto,auto);}
-}
-@-moz-keyframes contentChanged1{
-	from{clip:rect(1px,auto,auto,auto);}
-	to{clip:rect(0px,auto,auto,auto);}
-}
-@-webkit-keyframes contentChanged1{
-	from{clip:rect(1px,auto,auto,auto);}
-	to{clip:rect(0px,auto,auto,auto);}
-}
-@-ms-keyframes contentChanged1{
-	from{clip:rect(1px,auto,auto,auto);}
-	to{clip:rect(0px,auto,auto,auto);}
-}
-@keyframes contentChanged2{
-	from{clip:rect(0px,auto,auto,auto);}
-	to{clip:rect(1px,auto,auto,auto);}
-}
-@-moz-keyframes contentChanged2{
-	from{clip:rect(0px,auto,auto,auto);}
-	to{clip:rect(1px,auto,auto,auto);}
-}
-@-webkit-keyframes contentChanged2{
-	from{clip:rect(0px,auto,auto,auto);}
-	to{clip:rect(1px,auto,auto,auto);}
-}
-@-ms-keyframes contentChanged2{
-	from{clip:rect(0px,auto,auto,auto);}
-	to{clip:rect(1px,auto,auto,auto);}
-}
-.content-aware-resize>*:first-child{
-	&:nth-last-child(2n){
-		.animation(contentChanged1,.001s);
-	}
-	&:nth-last-child(2n+1){
-		.animation(contentChanged2,.001s);
-	}
 }
 
 @-moz-keyframes zoomIn{
