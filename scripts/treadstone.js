@@ -61,7 +61,7 @@ if(!('dataset' in document.createElement('a'))){
 		};
 		elements.setPrefixStyle=function(key,value){
 			elements.each(function(){
-				if(typeof this.style[key]=='string'){
+			    if (typeof this.style[key] == 'string') {
 					this.style[key]=value;
 				}else if(typeof this.style['Webkit'+key.substring(0,1).toUpperCase()+key.substring(1)]=='string'){
 					this.style['Webkit'+key.substring(0,1).toUpperCase()+key.substring(1)]=value;
@@ -136,9 +136,10 @@ if(!('dataset' in document.createElement('a'))){
 		container.style.minHeight=container.style.maxHeight=window.getComputedStyle(container).height;
 		container.style.minWidth=container.style.maxWidth=window.getComputedStyle(container).width;
 		container.style.overflow='hidden';
-		var resize=function(container){
-			$(container).setPrefixStyle('transition','max-height,min-height,max-width,min-width .3s,.3s,.3s,.3s');
-			if(container.scrollHeight>container.clientHeight){
+		var resize = function (container) {
+		    $(container).setPrefixStyle('transition', 'max-height 3s,max-width 3s,min-height 3s,min-width 3s');
+		    if (container.scrollHeight > container.clientHeight) {
+		        console.log(container.scrollHeight + ' ' + container.clientHeight + ' ' + parseInt(window.getComputedStyle(container).height, 10));
 				container.style.maxHeight=container.scrollHeight-container.clientHeight+parseInt(window.getComputedStyle(container).height,10)+'px';
 			}else{
 				container.style.minHeight='0px';
@@ -151,17 +152,18 @@ if(!('dataset' in document.createElement('a'))){
 		};
 		var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
 		if(MutationObserver){
-			var observer = new MutationObserver(function(mutations) {
-				console.log('mutation');
-				resize(mutations[0].target);
+		    var observer = new MutationObserver(function (mutations) {
+		        mutations.forEach(function (mutation) {
+		            resize(mutation.target);
+		        });
 			});
 			observer.observe(container,{ attributes: false, childList: true, characterData: true, subtree: true});
 		}else{
 			container.addEventListener('DOMNodeInserted',function(e){
-				resize(e.target);
+				resize(this);
 			});
 			container.addEventListener('DOMNodeRemoved',function(e){
-				resize(e.target);
+				resize(this);
 			});
 		}
 		var transitionend=function(e){
