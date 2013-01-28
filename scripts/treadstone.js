@@ -23,7 +23,7 @@ if(!('dataset' in document.createElement('a'))){
 		configurable:true
 	});
 }
-		
+
 (function(){
 	var $=function(query){
 		if(!query){
@@ -174,16 +174,14 @@ if(!('dataset' in document.createElement('a'))){
 			});
 		}
 		var transitionend=function(e){
-			// console.log(e.propertyName);
-			if(e.propertyName=='max-height'&&parseInt(e.target.style.minHeight,10)!=e.target.clientHeight){
-				e.target.style.minHeight=e.target.clientHeight+'px';
-			}else if(e.propertyName=='min-height'&&e.target.style.minHeight=='0px'){
+			if(e.propertyName=='max-height'||e.propertyName=='min-height'){
+				$(container).setPrefixStyle('transition', 'max-width .3s,min-width 2s');
 				e.target.style.minHeight=e.target.style.maxHeight=e.target.clientHeight+'px';
-			}else if(e.propertyName=='max-width'&&parseInt(e.target.style.minWidth,10)!=e.target.clientWidth){
-				e.target.style.minWidth=e.target.clientWidth+'px';
-			}else if(e.propertyName=='min-width'&&e.target.style.minWidth=='0px'){
+			}else if(e.propertyName=='max-width'||e.propertyName=='min-width'){
 				e.target.style.minWidth=e.target.style.maxWidth=e.target.clientWidth+'px';
+				$(container).setPrefixStyle('transition', 'max-height .3s,min-height 2s');
 			}
+		    $(container).setPrefixStyle('transition', 'max-height .3s,max-width .3s,min-height 2s,min-width 2s');
 		};
 		container.addEventListener('transitionend',transitionend);
 		container.addEventListener('webkitTransitionEnd',transitionend);
