@@ -55,3 +55,4 @@ ul.tabs li a{display:inline-block;line-height:2.5;padding:1px 1em 0;}
 .overlay .modal .modal-footer{padding:.5em 1em;border-top:1px solid #eee;text-align:right;}
 .overlay .modal .close{float:right;width:1.5em;line-height:1.5;padding:0;border:0;margin:.2em .2em 0 0;font-size:1.5em;font-weight:bold;text-align:center;background-color:transparent;color:#000;text-shadow:0 1px 0 #fff;opacity:.2;cursor:pointer;}.overlay .modal .close:hover{opacity:.4;}
 .content{padding:1em;}
+.content-aware-resize{overflow:hidden;}
