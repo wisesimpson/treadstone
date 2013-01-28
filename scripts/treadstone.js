@@ -137,9 +137,8 @@ if(!('dataset' in document.createElement('a'))){
 		container.style.minWidth=container.style.maxWidth=window.getComputedStyle(container).width;
 		container.style.overflow='hidden';
 		var resize = function (container) {
-		    $(container).setPrefixStyle('transition', 'max-height 3s,max-width 3s,min-height 3s,min-width 3s');
+		    $(container).setPrefixStyle('transition', 'max-height .3s,max-width .3s,min-height .3s,min-width .3s');
 		    if (container.scrollHeight > container.clientHeight) {
-		        console.log(container.scrollHeight + ' ' + container.clientHeight + ' ' + parseInt(window.getComputedStyle(container).height, 10));
 				container.style.maxHeight=container.scrollHeight-container.clientHeight+parseInt(window.getComputedStyle(container).height,10)+'px';
 			}else{
 				container.style.minHeight='0px';
@@ -167,7 +166,6 @@ if(!('dataset' in document.createElement('a'))){
 			});
 		}
 		var transitionend=function(e){
-			console.log(e.propertyName);
 			if(e.propertyName=='min-height'&&e.target.style.minHeight=='0px'){
 				e.target.style.minHeight=window.getComputedStyle(e.target).height;
 			}else if(e.propertyName=='min-width'&&e.target.style.minWidth=='0px'){
