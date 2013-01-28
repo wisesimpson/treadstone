@@ -29,7 +29,7 @@ img.border{border:1px solid #fff;box-shadow:0 0 1px rgba(0, 0, 0, 0.5);}
 .container{width:940px;margin:0 auto;}
 .row{clear:both;margin-left:-20px;}.row::after{display:table;clear:both;content:"";line-height:0;}
 .row .span,.row .span2,.row .span3,.row .span4,.row .span5,.row .span6,.row .span7,.row .span8,.row .span9,.row .span10,.row .span11,.row .span12{float:left;margin-left:20px;box-sizing:border-box;}
-.row .span{float:60px;}
+.row .span{width:60px;}
 .row .span2{width:140px;}
 .row .span3{width:220px;}
 .row .span4{width:300px;}
