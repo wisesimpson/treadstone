@@ -137,7 +137,7 @@ if(!('dataset' in document.createElement('a'))){
 		container.style.minWidth=container.style.maxWidth=container.clientWidth+'px';
 		container.classList.add('content-aware-resize');
 		var resize = function (container) {
-		    $(container).setPrefixStyle('transition', 'max-height .3s,max-width .3s,min-height 3s,min-width 3s');
+		    $(container).setPrefixStyle('transition', 'max-height .3s,max-width .3s,min-height 2s,min-width 2s');
 		    if (container.scrollHeight > container.clientHeight) {
 				container.style.maxHeight=container.scrollHeight+'px';
 			}else{
@@ -159,9 +159,9 @@ if(!('dataset' in document.createElement('a'))){
 		var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
 		if(MutationObserver){
 		    var observer = new MutationObserver(function (mutations) {
-				console.log('mutation');
 		        mutations.forEach(function (mutation) {
-		            resize(getContentAwareResizeContainer(mutation.target));
+					if(mutation.target.nodeType==1)
+						resize(getContentAwareResizeContainer(mutation.target));
 		        });
 			});
 			observer.observe(container,{ attributes: false, childList: true, characterData: true, subtree: true});
@@ -174,7 +174,7 @@ if(!('dataset' in document.createElement('a'))){
 			});
 		}
 		var transitionend=function(e){
-			console.log(e.propertyName);
+			// console.log(e.propertyName);
 			if(e.propertyName=='max-height'&&parseInt(e.target.style.minHeight,10)!=e.target.clientHeight){
 				e.target.style.minHeight=e.target.clientHeight+'px';
 			}else if(e.propertyName=='min-height'&&e.target.style.minHeight=='0px'){
