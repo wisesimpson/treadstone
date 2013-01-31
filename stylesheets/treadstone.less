@@ -289,13 +289,10 @@ ul{
 	&.tiles{
 		list-style:none;
 		li{
-			display:inline-block;
-			a{
-				display:inline-block;
-			}
-			.thumbnail,.content{
-				display:inline-block;
-				vertical-align:middle;
+			display:-moz-flex;
+			flex-direction:row;
+			&>img{
+				flex:auto;
 			}
 			.thumbnail{
 				margin-right:.2em;
