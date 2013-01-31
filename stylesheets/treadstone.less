@@ -177,8 +177,31 @@ h6{
 }
 button,input,select{
 	font-size:inherit;
+	font-family:inherit;
 	vertical-align:middle;
 }
+input[type=text],input[type=password],input[type=email],input[type=number]{
+	height:2.2858em;
+    padding:0 0.5em;
+    border: 0.1429em solid #999;
+	margin:0;
+	box-sizing:border-box;
+	&:focus{
+		border-color:#0983eb;
+	}
+	&:disabled{
+		background-color:#eee;
+	}
+}
+input[type=submit]{
+	height:2.2858em;
+	padding:0 1em;
+	border:.1429em solid #0983eb;
+	background-color:#0983eb;
+	color:#fff;
+	margin:0;
+	box-sizing:border-box;
+}	
 select{
 	min-width:12em;
 	height:2em;
@@ -311,10 +334,14 @@ menu{
 	padding:0;
 	margin:0;
 }
-.pull-left{
+.center-block{
+	padding:5em;
+	text-align:center;
+}
+.float-left{
 	float:left;
 }
-.pull-right{
+.float-right{
 	float:right;
 }
 img.border{
