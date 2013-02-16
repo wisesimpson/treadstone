@@ -24,8 +24,8 @@ if(!('dataset' in document.createElement('a'))){
 	});
 }
 
-(function(){
-	var $=function(query){
+var treadstone={
+	$:function(query){
 		if(!query){
 			var elements=[];
 		}else if(typeof query == 'string'){
@@ -61,7 +61,7 @@ if(!('dataset' in document.createElement('a'))){
 		};
 		elements.setPrefixStyle=function(key,value){
 			elements.each(function(){
-			    if (typeof this.style[key] == 'string') {
+				if (typeof this.style[key] == 'string') {
 					this.style[key]=value;
 				}else if(typeof this.style['Webkit'+key.substring(0,1).toUpperCase()+key.substring(1)]=='string'){
 					this.style['Webkit'+key.substring(0,1).toUpperCase()+key.substring(1)]=value;
@@ -73,8 +73,75 @@ if(!('dataset' in document.createElement('a'))){
 			});
 		};
 		return elements;
-	};
+	},
+	initContentAwareResize:function(container){
+		if(container){
+			var $=this.$;
+			container.style.minHeight=container.style.maxHeight=container.clientHeight+'px';
+			container.style.minWidth=container.style.maxWidth=container.clientWidth+'px';
+			container.classList.add('content-aware-resize');
+			var resize = function (container) {
+				$(container).setPrefixStyle('transition', 'max-height .3s,max-width .3s,min-height 2s,min-width 2s');
+				if (container.scrollHeight > container.clientHeight) {
+					container.style.maxHeight=container.scrollHeight+'px';
+				}else{
+					container.style.minHeight='0px';
+				}
+				if(container.scrollWidth>container.clientWidth){
+					container.style.maxWidth=container.scrollWidth+'px';
+				}else{
+					container.style.minWidth='0px';
+				}
+			};
+			var getContentAwareResizeContainer=function(node){
+				if(node.classList.contains('content-aware-resize')||node.parentNode==document){
+					return node;
+				}else{
+					return getContentAwareResizeContainer(node.parentNode);
+				}
+			};
+			var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+			if(MutationObserver){
+				var observer = new MutationObserver(function (mutations) {
+					mutations.forEach(function (mutation) {
+						if(mutation.target.nodeType==1)
+							resize(getContentAwareResizeContainer(mutation.target));
+					});
+				});
+				observer.observe(container,{ attributes: false, childList: true, characterData: true, subtree: true});
+			}else{
+				container.addEventListener('DOMNodeInserted',function(e){
+					resize(this);
+				});
+				container.addEventListener('DOMNodeRemoved',function(e){
+					resize(this);
+				});
+			}
+			var xResizeEnd=new CustomEvent('xResizeEnd');
+			var yResizeEnd=new CustomEvent('yResizeEnd');
+			var transitionend=function(e){
+				if(e.propertyName=='max-height'&&parseInt(e.target.style.minHeight,10)!=e.target.clientHeight){
+					e.target.style.minHeight=e.target.clientHeight+'px';
+				}else if(e.propertyName=='min-height'&&e.target.style.minHeight=='0px'){
+					e.target.style.minHeight=e.target.style.maxHeight=e.target.clientHeight+'px';
+				}else if(e.propertyName=='max-width'&&parseInt(e.target.style.minWidth,10)!=e.target.clientWidth){
+					e.target.style.minWidth=e.target.clientWidth+'px';
+				}else if(e.propertyName=='min-width'&&e.target.style.minWidth=='0px'){
+					e.target.style.minWidth=e.target.style.maxWidth=e.target.clientWidth+'px';
+				}else if(e.propertyName=='min-height'){
+					container.dispatchEvent(yResizeEnd);
+				}else if(e.propertyName=='min-width'){
+					container.dispatchEvent(xResizeEnd);
+				}
+			};
+			container.addEventListener('transitionend',transitionend);
+			container.addEventListener('webkitTransitionEnd',transitionend);
+		}
+	}	
+};
 
+(function(){
+	var $=treadstone.$;
 	$('ul.tabs>li.active>a').each(function(){
 		document.querySelector(this.getAttribute('href')).classList.add('shown');
 	});
@@ -132,64 +199,10 @@ if(!('dataset' in document.createElement('a'))){
 		});
 	});
 
-	var initContentAwareResize=function(container){
-		container.style.minHeight=container.style.maxHeight=container.clientHeight+'px';
-		container.style.minWidth=container.style.maxWidth=container.clientWidth+'px';
-		container.classList.add('content-aware-resize');
-		var resize = function (container) {
-		    $(container).setPrefixStyle('transition', 'max-height .3s,max-width .3s,min-height 2s,min-width 2s');
-		    if (container.scrollHeight > container.clientHeight) {
-				container.style.maxHeight=container.scrollHeight+'px';
-			}else{
-				container.style.minHeight='0px';
-			}
-			if(container.scrollWidth>container.clientWidth){
-				container.style.maxWidth=container.scrollWidth+'px';
-			}else{
-				container.style.minWidth='0px';
-			}
-		};
-		var getContentAwareResizeContainer=function(node){
-			if(node.classList.contains('content-aware-resize')||node.parentNode==document){
-				return node;
-			}else{
-				return getContentAwareResizeContainer(node.parentNode);
-			}
-		};
-		var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-		if(MutationObserver){
-		    var observer = new MutationObserver(function (mutations) {
-		        mutations.forEach(function (mutation) {
-					if(mutation.target.nodeType==1)
-						resize(getContentAwareResizeContainer(mutation.target));
-		        });
-			});
-			observer.observe(container,{ attributes: false, childList: true, characterData: true, subtree: true});
-		}else{
-			container.addEventListener('DOMNodeInserted',function(e){
-				resize(this);
-			});
-			container.addEventListener('DOMNodeRemoved',function(e){
-				resize(this);
-			});
-		}
-		var transitionend=function(e){
-			if(e.propertyName=='max-height'&&parseInt(e.target.style.minHeight,10)!=e.target.clientHeight){
-				e.target.style.minHeight=e.target.clientHeight+'px';
-			}else if(e.propertyName=='min-height'&&e.target.style.minHeight=='0px'){
-				e.target.style.minHeight=e.target.style.maxHeight=e.target.clientHeight+'px';
-			}else if(e.propertyName=='max-width'&&parseInt(e.target.style.minWidth,10)!=e.target.clientWidth){
-				e.target.style.minWidth=e.target.clientWidth+'px';
-			}else if(e.propertyName=='min-width'&&e.target.style.minWidth=='0px'){
-				e.target.style.minWidth=e.target.style.maxWidth=e.target.clientWidth+'px';
-			}
-		};
-		container.addEventListener('transitionend',transitionend);
-		container.addEventListener('webkitTransitionEnd',transitionend);
-	};
+
 
 	var init=function(){
-		initContentAwareResize(document.querySelector('.content-aware-resize'));
+		treadstone.initContentAwareResize(document.querySelector('.content-aware-resize'));
 	};
 
 	if(document.readyState=='complete'){
