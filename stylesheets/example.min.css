@@ -1,11 +1,2 @@
-article {
-  margin-bottom: 10em;
-}
-article section {
-  padding: 1em 0;
-  border-bottom: 1px solid #eee;
-}
-.example-box {
-  border: 2px solid red;
-  padding: 2em;
-}
+article{margin-bottom:10em;}article section{padding:1em 0;border-bottom:1px solid #eee;}
+.example-box{border:2px solid red;}
